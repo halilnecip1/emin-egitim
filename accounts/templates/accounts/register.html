@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kayıt Ol{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Hesap Oluştur</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-row-container">
+            <fieldset class="form-column">
+                <legend>Veli Bilgileri</legend>
+                {{ user_form.as_p }}
+            </fieldset>
+
+            <fieldset class="form-column">
+                <legend>Öğrenci Bilgileri</legend>
+                {{ student_form.as_p }}
+            </fieldset>
+        </div>
+        
+        <button type="submit" class="btn-submit" style="margin-top: 20px;">Kayıt Ol ve Öğrenciyi Ekle</button>
+    </form>
+    <div class="form-link">
+        <p>Zaten bir hesabınız var mı? <a href="{% url 'login' %}">Giriş Yap</a></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_styles %}
+<style>
+    /* Formu daha okunaklı yapmak için küçük stil eklemeleri */
+    fieldset {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    legend {
+        padding: 0 10px;
+        font-weight: 600;
+        color: #333;
+    }
+</style>
+{% endblock %}

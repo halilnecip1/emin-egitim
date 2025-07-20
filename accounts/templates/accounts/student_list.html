@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Öğrencilerim - Panelim{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>ÖĞRENCİLERİM</h1>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="dashboard-nav">
+            <a href="{% url 'student_list' %}" {% if request.resolver_match.url_name == 'student_list' or request.resolver_match.url_name == 'student_add' %}class="active"{% endif %}>Öğrencilerim</a>
+            <a href="#">Eğitim Takvimi</a>
+            <a href="{% url 'payment_history' %}" {% if request.resolver_match.url_name == 'payment_history' %}class="active"{% endif %}>Ödemelerim</a>
+            <a href="{% url 'profile_update' %}" {% if request.resolver_match.url_name == 'profile_update' %}class="active"{% endif %}>Bilgilerim</a>
+            <form action="{% url 'logout' %}" method="post" class="logout-form-panel">
+                {% csrf_token %}
+                <button type="submit" class="logout-link">Çıkış</button>
+            </form>
+        </div>
+
+        <div class="dashboard-main">
+            <div class="table-header">
+                <h3>Kayıtlı Öğrenciler</h3>
+                <a href="{% url 'student_add' %}" class="btn-add-student">+ Yeni Öğrenci</a>
+            </div>
+            
+            {% if students %}
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>Ad Soyad</th>
+                            <th>Sınıf</th>
+                            <th>Okul</th>
+                            <th>Düzenle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td>{{ student.first_name }} {{ student.last_name }}</td>
+                            <td>{{ student.grade }}</td>
+                            <td>{{ student.school }}</td>
+                            <td><a href="#">✏️</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-data-message">Henüz sisteme kayıtlı bir öğrenciniz bulunmamaktadır. Lütfen "Yeni Öğrenci" butonuna tıklayarak ilk öğrencinizi ekleyin.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

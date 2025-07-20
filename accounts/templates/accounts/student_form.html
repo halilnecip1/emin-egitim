@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Yeni Öğrenci Ekle - Panelim{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Yeni Öğrenci Ekle</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-submit">Öğrenciyi Kaydet</button>
+    </form>
+    <div class="form-link">
+        <p><a href="{% url 'student_list' %}">← Öğrenci Listesine Geri Dön</a></p>
+    </div>
+</div>
+{% endblock %}

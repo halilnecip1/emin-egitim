@@ -1,0 +1,963 @@
+/* static/css/style.css */
+
+/* Temel Sıfırlama ve Font Ayarı */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7f6;
+    color: #2f2f2f;
+    /* YENİ EKLENEN SATIR: Tüm içeriği yukarıdan ittiriyoruz */
+    padding-top: 80px; 
+}
+
+
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    
+    /* MEVCUT background-color SATIRINI SİLİP YERİNE BU SATIRI EKLEYİN */
+    background: linear-gradient(to right, #C04848, #480048); /* Kırmızıdan Mora doğru renk geçişi */
+    
+    border-bottom: 1px solid #34495e;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Logoyu sola, geri kalan her şeyi sağa yaslar */
+    align-items: center;
+    height: 80px;
+    padding: 0 5%;
+}
+/* YENİ EKLENEN KURAL */
+.main-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* ANASAYFA/PROGRAMLAR grubu ile sağdaki grup arası boşluk */
+}
+.logo a {
+    text-decoration: none;
+    display: flex; /* İkonu dikeyde ortalamak için */
+    align-items: center;
+}
+
+/* YENİ KURAL: Logo resmini yuvarlak yapmak ve boyutlandırmak için */
+.logo img {
+    height: 45px;          /* Navbar yüksekliğiyle aynı */
+    width: 60px;           /* Daire için eşit genişlik */
+    border-radius: 50%;    /* Yuvarlak yapmak için */
+    object-fit: cover;     /* Görseli orantılı kırpar */
+    background-color: white;  /* Varsa boşluklar için arka plan */
+    padding: 2px;          /* Kenarlardan az boşluk */
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); /* Hafif gölge estetik için */
+}
+
+.logo img:hover {
+    transform: rotate(360deg); /* İsteğe bağlı: Üzerine gelince dönme efekti */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 15px; /* ANASAYFA ve PROGRAMLAR arası boşluk */
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #ecf0f1;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #ffffff;
+}
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Sağdaki ikonlu linkler arası boşluk */
+}
+
+.btn-primary-nav {
+    text-decoration: none;
+    background-color: #3498db;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.nav-link-icon {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+}
+
+.nav-link-icon:hover {
+    color: #ffffff;
+}
+
+.logout-form {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.btn-logout-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #e74c3c;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+}
+
+.btn-logout-icon:hover {
+    color: #ff7675;
+}
+
+/* Sayfa Başlığı */
+.page-header {
+    /* margin-top: 65px; Bu satırı silebilir veya yorum satırı yapabilirsiniz */
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Bilgi Kutuları */
+.info-bar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    /* BU SATIRI DEĞİŞTİRİYORUZ */
+    margin: 20px 10%; /* Negatif üst margin'i kaldırıyoruz */
+    position: relative;
+    z-index: 10;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.info-box {
+    background-color: #ffc107;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* İçerik Alanı */
+.content-area {
+    display: flex;
+    gap: 20px;
+    padding: 20px 10%;
+}
+
+.details-section, .accordion-section {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 200px;
+}
+
+/* Kurs Listesi */
+.course-list-container {
+    padding: 20px 10%;
+}
+
+.course-list-container h2 {
+    margin-bottom: 20px;
+}
+
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.course-table th, .course-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.course-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-select {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Form Sayfaları */
+.form-container {
+    max-width: 900px; /* SADECE BU SATIRI 500px'ten 900px'e DEĞİŞTİR */
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.form-row-container {
+    display: flex;
+    gap: 30px; /* İki form arasına boşluk */
+    margin-bottom: 20px;
+}
+
+.form-column {
+    flex: 1; /* Her iki sütunun da mevcut alanı eşit olarak paylaşmasını sağlar */
+    min-width: 0; /* Flexbox'ın daralabilmesi için önemlidir */
+}
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-container form p {
+    margin-bottom: 15px;
+}
+
+.form-container form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-container form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.form-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Panel Sayfaları */
+.dashboard-container {
+    /* Navbar ile arasında boşluk oluşturmak için */
+    margin-top: 40px;
+    margin-bottom: 40px; /* Altta da boşluk olsun */
+}
+.dashboard-header {
+    padding: 30px 10%;
+    background-color: #ffffff;
+    text-align: center; /* BAŞLIĞI YATAYDA ORTALAR */
+    margin-bottom: 30px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.dashboard-header h1 {
+    font-size: 36px;
+    color: #343a40; /* Koyu gri/siyah yazı rengi */
+    font-weight: 600;
+    text-shadow: none; /* Varsa gölgeyi kaldırır */
+}
+.dashboard-content {
+    display: flex;
+    gap: 20px;
+    padding: 0 10% 40px 10%;
+}
+
+.dashboard-nav {
+    flex: 0 0 200px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    height: fit-content;
+}
+
+.dashboard-nav a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.dashboard-nav a.active, .dashboard-nav a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.logout-form-panel {
+    width: 100%;
+}
+
+/* Bu kural hem link hem de buton için çalışır */
+.dashboard-nav .logout-link {
+    /* Butonun varsayılan stillerini sıfırlama */
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em; /* Parent'ın font boyutunu alır */
+    
+    /* Link görünümü */
+    color: #dc3545;
+    margin-top: 10px;
+    border-top: 1px solid #f0f0f0;
+    padding: 15px; /* Diğer linklerle aynı hizada olması için */
+    font-weight: 600;
+    border-radius: 5px; /* Köşeleri yuvarlak yapalım */
+}
+
+.dashboard-nav .logout-link:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.dashboard-main {
+    flex-grow: 1;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Diğer Stiller... */
+.profile-link {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-weight: 600;
+}
+
+/* Modal Stilleri */
+.modal-overlay {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6); /* Arkaplanı biraz daha koyu yapalım */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); /* Arkaplanı bulanıklaştırma efekti */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px 40px; /* Boşlukları artıralım */
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    text-align: center; /* İçeriği ortalayalım */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-content h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+    font-size: 16px;
+    color: #6c757d;
+}
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+.modal-actions .btn-submit, 
+.modal-actions .btn-secondary {
+    width: auto; /* Tam genişlik olmasın */
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 16px;
+}
+.modal-actions .btn-secondary {
+    background-color: #6c757d;
+}
+/* AÇILIR MENÜ (SELECT) İÇİN ÖZEL STİLLER */
+#add-to-cart-form select {
+    /* Tarayıcının varsayılan görünümünü kaldır */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    padding-right: 40px; /* Sağdaki ok için yer aç */
+    font-size: 16px;
+    font-weight: 500;
+    color: #495057;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: left;
+
+    /* Özel ok ikonu (SVG formatında) */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+#add-to-cart-form select:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
+}
+
+/* Modal içindeki buton */
+#add-to-cart-form .btn-submit {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ... Diğer tüm stilleriniz ... */
+
+/* Akordiyon Menü Stilleri */
+.accordion-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px; /* Kenarları yuvarlak yapıyoruz */
+    margin-bottom: 10px;
+    overflow: hidden; /* İçerik taşarsa gizle (yuvarlak kenarlar için önemli) */
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.accordion-header {
+    background-color: #ffffff;
+    color: #343a40;
+    cursor: pointer;
+    padding: 18px 20px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: #f8f9fa; /* Üzerine gelince hafif gri */
+}
+
+/* Sağ taraftaki + / - ikonu için */
+.accordion-header::after {
+    content: '+'; /* Kapalıyken + işareti göster */
+    font-size: 22px;
+    font-weight: bold;
+    color: #007bff;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Başlık aktif olduğunda (yani içerik açıkken) */
+.accordion-header.active::after {
+    content: "−"; /* Açıkken - (eksi) işareti göster */
+}
+
+.accordion-content {
+    padding: 0 20px; /* İçeriğin kenar boşlukları (yatay) */
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Yumuşak açılıp kapanma efekti */
+}
+
+/* İçerik açıldığında dikey boşlukları da ekle */
+.accordion-header.active + .accordion-content {
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.accordion-content ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.accordion-content ul li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* Bilgilendirme Butonu ve Kutuları */
+.info-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: none;
+    background-color: #ffc107;
+    color: #212529;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.note-box {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #e0f7fa;
+    border-left: 5px solid #00bcd4;
+    border-radius: 5px;
+}
+
+.dashboard-content {
+    display: flex;
+    gap: 30px; /* Kenar menü ile ana içerik arası boşluk */
+    padding: 0 10% 40px 10%;
+    align-items: flex-start; /* Hizalamayı yukarıdan başlat */
+}
+
+.dashboard-nav {
+    flex: 0 0 220px; /* Genişliği biraz artırdık */
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    height: fit-content;
+}
+
+.dashboard-nav a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight: 600; /* Yazıyı daha belirgin yaptık */
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dashboard-nav a.active {
+    background-color: #007bff;
+    color: white;
+}
+.dashboard-nav a:not(.active):hover {
+    background-color: #e9f5ff; /* Çok açık mavi bir arkaplan */
+    color: #007bff; /* Yazı rengini ana mavi yap */
+}
+
+.dashboard-nav a.logout-link {
+    color: #dc3545;
+    margin-top: 10px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+}
+.dashboard-nav a.logout-link:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.dashboard-main {
+    flex-grow: 1;
+    background: #fff;
+    padding: 30px; /* İç boşluğu artırdık */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.table-header h3 {
+    margin: 0;
+    font-size: 22px;
+    color: #333;
+}
+
+.btn-add-student {
+    background-color: #007bff; /* Rengi mavi yaptık */
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.btn-add-student:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.student-table thead th {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.student-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.student-table tbody td {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+    color: #495057;
+}
+
+.student-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.student-table td a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.no-data-message {
+    padding: 40px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-top: 20px;
+    color: #6c757d;
+}
+
+.profile-form {
+    margin-top: 20px;
+}
+
+/* Django'nun form.as_p ile oluşturduğu P etiketlerini düzenliyoruz */
+.profile-form p {
+    margin-bottom: 1.5rem; /* Alanlar arası dikey boşluk */
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+.profile-form input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem; /* Daha modern yuvarlaklık */
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+/* Input alanına tıklandığında (focus) oluşacak mavi çerçeve */
+.profile-form input:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
+}
+
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Ana "Güncelle" butonu */
+.form-actions .btn-submit {
+    width: auto; /* Formun tamamını kaplamasın */
+    padding: 12px 25px;
+}
+
+/* "Şifre Değiştir" linkini daha sade hale getiriyoruz */
+.form-actions a.btn-secondary {
+    background: none;
+    color: #007bff;
+    padding: 0;
+    text-decoration: underline;
+    font-weight: 600;
+}
+.form-actions a.btn-secondary:hover {
+    color: #0056b3;
+}   
+
+
+
+
+
+
+
+
+.student-table td.status-cell {
+    font-weight: 600;
+}
+
+.student-table td.status-waiting {
+    color: #6c757d; /* Gri */
+}
+
+.student-table td.status-pending {
+    color: #ff8c00; /* Turuncu */
+}
+
+.student-table td.status-approved {
+    color: #28a745; /* Yeşil */
+}
+
+.student-table td.status-rejected {
+    color: #dc3545; /* Kırmızı */
+}
+
+
+
+
+/* Sayfa başlığını diğer panel sayfaları gibi yapıyoruz */
+.checkout-container .page-header {
+    height: auto;
+    padding: 30px 10%;
+    color: #333;
+    background-image: none;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    text-shadow: none;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.checkout-container .page-header h1 {
+    color: #333;
+    text-shadow: none;
+    font-size: 36px;
+}
+
+/* Ana içeriği iki sütuna ayırıyoruz (Eğitimler ve Özet) */
+.checkout-main {
+    display: flex;
+    gap: 30px;
+    padding: 0 10% 40px 10%;
+    align-items: flex-start; /* Sütunları yukarıdan hizala */
+}
+
+/* Sol Sütun: Eğitimler Listesi */
+.checkout-items {
+    flex-grow: 1; /* Mevcut tüm boş alanı kaplasın */
+}
+
+/* Sağ Sütun: Özet Kutusu */
+.checkout-summary {
+    flex: 0 0 350px; /* Genişliği 350px olsun, esnemesin */
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    /* Kullanıcı aşağı kaydırdığında özet kutusu ekranda sabit kalır */
+    position: sticky; 
+    top: 110px; /* Navbar (80px) + boşluk (30px) */
+}
+
+.checkout-items h3, .checkout-summary h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Sepetteki her bir kayıt öğesi */
+.checkout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.item-details h4 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #007bff;
+}
+
+.item-details p {
+    font-size: 15px;
+    color: #6c757d;
+    margin: 3px 0;
+}
+
+.btn-remove-item {
+    color: #dc3545;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.item-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    white-space: nowrap; /* Fiyatın alta kaymasını engelle */
+    margin-left: 20px;
+}
+
+/* Özet Kutusu İçindeki Satırlar */
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #495057;
+}
+
+.summary-line.total {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+}
+
+.checkout-summary hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.checkout-summary .btn-submit {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+}
+
+.clear-cart-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.btn-clear-cart {
+    color: #6c757d;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.btn-clear-cart:hover {
+    color: #dc3545;
+    text-decoration: underline;
+}
+
+
+

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_styles %}
+<style>
+    .checkout-main {
+        display: flex !important;
+        gap: 30px !important;
+        align-items: flex-start !important;
+    }
+    .checkout-items {
+        flex-grow: 1 !important;
+    }
+    .checkout-summary {
+        flex: 0 0 350px !important;
+        background: #fff !important;
+        padding: 30px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+        position: sticky !important;
+        top: 110px !important; /* Navbar (80px) + boşluk (30px) */
+    }
+    .checkout-item {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        background: #fff !important;
+        padding: 20px !important;
+        border-radius: 8px !important;
+        margin-bottom: 15px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+    }
+    .checkout-container .page-header {
+        margin-bottom: 40px !important;
+        height: auto !important;
+        padding: 30px 10% !important;
+        color: #333 !important;
+        background-image: none !important;
+        background-color: #ffffff !important;
+        border-bottom: 1px solid #e0e0e0 !important;
+        text-shadow: none !important;
+        text-align: center !important;
+    }
+    .checkout-container .page-header h1 {
+        color: #333 !important;
+        text-shadow: none !important;
+    }
+</style>
+{% endblock %}
+
+
+{% block title %}Sepetim - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="checkout-container">
+    <div class="page-header">
+        <h1>SEPETİNİZ</h1>
+    </div>
+
+    <div class="checkout-main">
+        <div class="checkout-items">
+            <h3>Eğitimler</h3>
+            {% for item in detailed_cart_items %}
+            <div class="checkout-item">
+                <div class="item-details">
+                    <h4>{{ item.course.program.title }}</h4>
+                    <p>{{ item.course.venue_and_time }}</p>
+                    <p><strong>Öğrenci:</strong> {{ item.student.first_name }} {{ item.student.last_name }}</p>
+                    <a href="{% url 'cart_remove_item' forloop.counter0 %}" class="btn-remove-item">Kaldır</a>
+                </div>
+                <div class="item-price">
+                    {{ item.course.program.price }} ₺
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="checkout-summary">
+            <h3>Özet</h3>
+            <div class="summary-line">
+                <span>Program Sayısı:</span>
+                <span>{{ detailed_cart_items|length }}</span>
+            </div>
+            <hr>
+            <div class="summary-line total">
+                <span>TOPLAM:</span>
+                <span>{{ total_price }} ₺</span>
+            </div>
+            <form action="{% url 'complete_enrollment' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-submit">KAYITLARI TAMAMLA</button>
+                <div class="clear-cart-container">
+                    <a href="{% url 'cart_clear' %}" class="btn-clear-cart">Sepeti Boşalt</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

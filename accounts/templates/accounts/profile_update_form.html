@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Bilgilerim - Panelim{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>BİLGİLERİM</h1>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="dashboard-nav">
+            <a href="{% url 'student_list' %}" {% if request.resolver_match.url_name == 'student_list' or request.resolver_match.url_name == 'student_add' %}class="active"{% endif %}>Öğrencilerim</a>
+            <a href="#">Eğitim Takvimi</a>
+            <a href="{% url 'payment_history' %}" {% if request.resolver_match.url_name == 'payment_history' %}class="active"{% endif %}>Ödemelerim</a>
+            <a href="{% url 'profile_update' %}" {% if request.resolver_match.url_name == 'profile_update' %}class="active"{% endif %}>Bilgilerim</a>
+            <form action="{% url 'logout' %}" method="post" class="logout-form-panel">
+                {% csrf_token %}
+                <button type="submit" class="logout-link">Çıkış</button>
+            </form>
+        </div>
+
+        <div class="dashboard-main">
+            <h3>Kişisel Bilgileri Düzenle</h3>
+            <form method="post" class="profile-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Bilgileri Güncelle</button>
+                    <a href="{% url 'password_change' %}" class="btn-secondary">Şifre Değiştir</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

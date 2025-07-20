@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Emin Eğitim Yaz Okulları{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block extra_styles %}{% endblock %}
+</head>
+<body data-is-authenticated="{{ user.is_authenticated|yesno:'true,false' }}">
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png' %}" alt="Site Logosu">
+                </a>
+            </div>
+            <div class="main-nav-links">
+                <ul class="nav-links">
+                    <li><a href="{% url 'home' %}">ANASAYFA</a></li>
+                    <li><a href="#">PROGRAMLAR</a></li>
+                </ul>
+                <div class="auth-links">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'cart_detail' %}" class="nav-link-icon"><i class="fas fa-shopping-cart"></i> SEPET (<span id="cart-count">{{ cart_item_count }}</span>)</a>
+                        <a href="{% url 'student_list' %}" class="nav-link-icon"><i class="fas fa-user"></i> {{ user.first_name|upper }} {{ user.last_name|upper }}</a>
+                        <form class="logout-form" action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-logout-icon"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn-primary-nav">GİRİŞ / KAYIT OL</a>
+                    {% endif %}
+                </div>
+            </div>
+            
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    {% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                Toastify({
+                    text: "{{ message }}",
+                    duration: 5000,
+                    close: true,
+                    gravity: "top", 
+                    position: "right",
+                    stopOnFocus: true,
+                    style: {
+                        background: "{% if message.tags == 'success' %}linear-gradient(to right, #00b09b, #96c93d){% elif message.tags == 'error' %}linear-gradient(to right, #ff5f6d, #ffc371){% else %}linear-gradient(to right, #007bff, #0056b3){% endif %}",
+                    }
+                }).showToast();
+            {% endfor %}
+        });
+    </script>
+    {% endif %}
+
+</body>
+</html>

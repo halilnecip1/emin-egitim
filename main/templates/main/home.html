@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Anasayfa - {{ block.super }}{% endblock %}
+
+{% block content %}
+
+{% if program %}
+    <div class="page-header" style="background-image: url('{% static 'img/banner.jpg' %}');">
+        <h1>{{ program.title }}</h1>
+    </div>
+
+    <div class="info-bar">
+        <div class="info-box"><strong>Konum:</strong> {{ program.location }}</div>
+        <div class="info-box">
+            <strong>Başlangıç / Bitiş:</strong>
+            {{ program.start_date|date:"d M" }} - {{ program.end_date|date:"d M Y" }}
+        </div>
+        <div class="info-box"><strong>Ücret:</strong> {{ program.price }} ₺</div>
+    </div>
+
+    <div class="content-area">
+        <div class="details-section">
+            <div class="poster-placeholder">
+                {% if program.poster %}
+                    <img src="{{ program.poster.url }}" alt="{{ program.title }} Afişi" style="width: 100%; height: auto; border-radius: 8px;">
+                {% else %}
+                    <p>Afiş Alanı</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="accordion-section">
+            {% for section in program.sections.all %}
+                <div class="accordion-item">
+                    <button class="accordion-header">{{ section.title }}</button>
+                    <div class="accordion-content">
+                        {{ section.content|safe }}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <button class="info-button" id="how-to-register-btn">Eğitime Nasıl Kaydolacağım?</button>
+            
+            <div class="note-box">
+                <p>Not: Kurumumuz hiçbir ticari amaç gütmemektedir. Program giderlerimiz kurumumuza yapılan bağışlarla karşılanmaktadır.</p>
+            </div>
+        </div>
+    </div>
+
+    {% if program.courses.all %}
+    <div class="course-list-container">
+        <h2>Kurslarımız</h2>
+        <table class="course-table">
+            <thead>
+                <tr>
+                    <th>Yer / Saat</th>
+                    <th>Sınıf Aralığı</th>
+                    <th>Kontenjan</th>
+                    <th>Kayıt</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in program.courses.all %}
+                    <tr>
+                        <td>{{ course.venue_and_time }}</td>
+                        <td>{{ course.grade_range }}</td>
+                        <td>{{ course.capacity }}</td>
+                        <td>
+                            <button class="btn-select btn-open-modal" data-course-id="{{ course.id }}">Seçiniz</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+{% else %}
+    <div class="container" style="text-align: center; padding: 50px;">
+        <h1>Hoş Geldiniz!</h1>
+        <p>Şu anda gösterilecek aktif bir yaz okulu programı bulunmamaktadır. Lütfen daha sonra tekrar kontrol ediniz.</p>
+    </div>
+{% endif %}
+
+
+<div id="student-select-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h3>Öğrenci Seçimi</h3>
+        <p>Bu kursa kaydetmek istediğiniz öğrenciyi seçin.</p>
+        <form id="add-to-cart-form">
+            {% csrf_token %}
+            <input type="hidden" name="course_id" id="modal-course-id">
+            <select name="student_id" id="modal-student-select" required>
+                <option value="">Öğrenci Seçiniz...</option>
+            </select>
+            <button type="submit" class="btn-submit">Sepete Ekle</button>
+        </form>
+    </div>
+</div>
+
+<div id="how-to-register-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="modal-close how-to-register-modal-close">&times;</span>
+        <h3>Eğitime Nasıl Kaydolacağım?</h3>
+        <ul>
+            <li>Önce sisteme veli olarak <a href="{% url 'register' %}">kayıt olun</a> ve giriş yapın.</li>
+            <li>Daha sonra <a href="{% url 'student_list' %}">panelinizden</a> öğrencinizi / öğrencilerinizi sisteme ekleyin.</li>
+            <li><a href="{% url 'home' %}">Eğitimler</a> sayfasında almak istediğiniz eğitimi seçin.</li>
+            <li>Öğrencinize uygun seçeneği seçin ve 'Sepete Ekle' butonuna basın.</li>
+            <li><a href="{% url 'cart_detail' %}">Sepetinizi</a> onaylayarak kayıt talebini tamamlayın.</li>
+        </ul>
+        <button class="modal-close-btn how-to-register-modal-close">Kapat</button>
+    </div>
+</div>
+
+<div id="login-required-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="modal-close login-required-modal-close">&times;</span>
+        <h3>Giriş Gerekli</h3>
+        <p>Öğrencinizi seçip kursa kaydetmek için lütfen giriş yapın veya yeni bir hesap oluşturun.</p>
+        <div class="modal-actions">
+            <a href="{% url 'login' %}" class="btn-submit">Giriş Yap</a>
+            <a href="{% url 'register' %}" class="btn-secondary">Kayıt Ol</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
