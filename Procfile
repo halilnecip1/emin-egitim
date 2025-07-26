@@ -1,1 +1,0 @@
-web: /app/.venv/bin/gunicorn lidersite.wsgi:application
