@@ -18,5 +18,6 @@ urlpatterns = [
     path('sepet/', include('enrollments.urls')),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG: # <-- Bu kısım ÖNEMLİ
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
