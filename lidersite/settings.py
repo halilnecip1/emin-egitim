@@ -76,7 +76,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'lidersite.wsgi.application'
 
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
