@@ -1,1 +1,1 @@
-web: gunicorn lidersite.wsgi:application
+web: /app/.venv/bin/gunicorn lidersite.wsgi:application
