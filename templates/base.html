@@ -42,12 +42,7 @@
                         <a href="{% url 'login' %}" class="btn-primary-nav">GİRİŞ / KAYIT OL</a>
                     {% endif %}
                 </div>
-                {# HAMBURGER MENÜ BUTONU EN SAĞDA OLACAK #}
-                <div class="hamburger">
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3"></div>
-                </div>
+                
             </div>
         </nav>
     </header>
@@ -61,32 +56,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const authLinks = document.querySelector('.auth-links'); // auth-links'i seçtik
-            const body = document.body;
-
-            hamburger.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                authLinks.classList.toggle('active-mobile'); // auth-links için yeni sınıf
-                hamburger.classList.toggle('active');
-                if (navLinks.classList.contains('active')) {
-                    body.style.overflow = 'hidden';
-                } else {
-                    body.style.overflow = 'auto';
-                }
-            });
-
-            document.addEventListener('click', function(event) {
-                if (!navLinks.contains(event.target) && !authLinks.contains(event.target) && !hamburger.contains(event.target) && (navLinks.classList.contains('active') || authLinks.classList.contains('active-mobile'))) {
-                    navLinks.classList.remove('active');
-                    authLinks.classList.remove('active-mobile');
-                    hamburger.classList.remove('active');
-                    body.style.overflow = 'auto';
-                }
-            });
-        });
+        
     </script>
 
     {% if messages %}
