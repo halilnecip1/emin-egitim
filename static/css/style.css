@@ -142,7 +142,7 @@ nav {
 /* Sayfa Başlığı */
 .page-header {
     /* margin-top: 65px; Bu satırı silebilir veya yorum satırı yapabilirsiniz */
-    height: 250px;
+    height: 180px;
     background-size: cover;
     background-position: center;
     display: flex;
