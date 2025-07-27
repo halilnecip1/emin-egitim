@@ -973,218 +973,92 @@ nav {
 
 /* Ekran Genişliği 992px ve altı (Tabletler ve Daha Küçük Cihazlar) */
 @media (max-width: 992px) {
-    /* Genel Ayarlamalar */
-    body {
-        font-size: 15px; /* Okunabilirliği artır */
+    /* Navbar öğelerinin genel küçülmesi */
+    .nav-links li a,
+    .nav-link-icon,
+    .btn-primary-nav,
+    .btn-logout-icon {
+        font-size: 13px; /* Tüm yazı tiplerini küçült */
+        padding: 8px 12px; /* Düğme ve bağlantı boşluklarını küçült */
+        gap: 5px; /* İkon ve metin arası boşluğu küçült */
     }
-
-    nav {
-        flex-wrap: wrap; /* Navbar öğelerini alt alta atmasını sağlar */
-        height: auto; /* Yüksekliği içeriğine göre ayarla */
-        padding: 10px 3%; /* Yan boşlukları daralt */
-        justify-content: space-between; /* Logo sola, auth-links ve hamburger sağa */
-        align-items: center; /* Dikeyde ortala */
-    }
-
-    .logo {
-        flex-shrink: 0; /* Logoyu küçülmesini engelle */
-    }
-
     .logo img {
-        height: 60px; /* Logoyu küçült */
-        width: 60px;
+        height: 70px; /* Logoyu biraz küçült */
+        width: 70px;
+    }
+    nav {
+        height: auto; /* Yüksekliği otomatik yap */
+        padding: 10px 3%; /* Yan boşlukları daralt */
+    }
+    .main-nav-links {
+        gap: 15px; /* Ana navigasyon linkleri ve auth linkleri arasındaki boşluğu azalt */
     }
 
-    /* Ana navigasyon linkleri (ANASAYFA, PROGRAMLAR) */
-    .nav-links {
-        display: none; /* Varsayılan olarak gizle */
-        width: 100%; /* Tam genişlik kapla */
-        flex-direction: column; /* Linkleri alt alta sırala */
-        background-color: #480048; /* Navbar rengiyle aynı arka plan */
-        position: absolute;
-        top: 80px; /* Navbar'ın altından başla */
-        left: 0;
-        box-shadow: 0 5px 5px rgba(0,0,0,0.2);
-        padding: 10px 0;
-        z-index: 999; /* Hamburgerin altında kalsın */
+    /* Hamburger menü sadece 992px altında görünecek */
+    .hamburger {
+        display: flex; /* Hamburger ikonunu göster */
+        margin-left: 15px; /* Sağdaki butonlardan biraz boşluk */
     }
 
-    .nav-links.active { /* JavaScript ile eklenen active sınıfı */
-        display: flex; /* Aktif olduğunda göster */
-    }
-
-    .nav-links li {
-        width: 100%;
-        text-align: center;
-    }
-
-    .nav-links li a {
-        padding: 15px 20px;
-        width: 100%;
-        display: block;
-    }
-
-    /* Auth linkleri (Sepet, Profil, Giriş/Kayıt Ol) */
-    .auth-links {
-        display: flex; /* Gerekirse gizleyin veya düzenleyin */
-        /* flex-grow: 1; /* Sağ tarafta boşluk bırakmak için esne */
-        justify-content: flex-end; /* Sağ tarafa yasla */
-        gap: 10px; /* Boşluğu azalt */
-        align-items: center; /* Dikeyde hizala */
-    }
-
+    /* Bu alanda hala sığmayacak öğeleri daha küçük ekranlar için gizleyelim */
     .nav-link-icon { /* Sepet ve Profil ikonlu linkleri gizle */
         display: none;
     }
-    
-    .btn-primary-nav { /* Giriş/Kayıt Ol butonu */
-        padding: 8px 16px; /* Buton boyutunu küçült */
-        font-size: 14px;
-        white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
-    }
 
-    .btn-logout-icon { /* Çıkış butonu */
-        font-size: 14px;
-        padding: 8px 16px; /* Buton gibi davranması için padding ekleyelim */
-        border: 1px solid #e74c3c; /* Daha belirgin olsun */
-        border-radius: 5px;
-        white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
-    }
-    .btn-logout-icon:hover {
-        background-color: #e74c3c;
-        color: white;
-    }
-
-    /* Hamburger Menü İkonu */
-    .hamburger {
-        display: flex; /* Mobil görünümde göster */
-        flex-direction: column;
-        justify-content: space-around;
-        width: 30px;
-        height: 25px;
-        margin-left: 15px; /* Sağdaki butonlardan biraz boşluk */
-        cursor: pointer;
-        z-index: 1001; /* Navigasyon linklerinin üzerinde olsun */
-    }
-
-    .hamburger div { /* Hamburger çubukları */
+    /* Navigasyon ve auth linklerinin mobil menüye geçişi */
+    .nav-links, .auth-links {
+        flex-direction: column; /* Öğeleri alt alta sırala */
+        position: absolute; /* Mutlak konumlandırma ile menüyü aç */
         width: 100%;
-        height: 3px;
-        background-color: white;
-        border-radius: 2px;
-        transition: all 0.3s ease-in-out;
+        left: 0;
+        background-color: #480048; /* Navbar ile aynı arka plan */
+        box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+        padding: 10px 0;
+        text-align: center;
+        transition: top 0.3s ease-in-out; /* Açılış kapanış animasyonu */
+        z-index: 998; /* Hamburgerin altında kalsın */
+    }
+    .nav-links.active, .auth-links.active-mobile {
+        display: flex !important; /* JavaScript ile aktif olduğunda göster */
     }
 
-    /* Hamburger menü açıldığında X işaretine dönüşümü */
-    .hamburger.active .bar1 { transform: rotate(-45deg) translate(-5px, 6px); }
-    .hamburger.active .bar2 { opacity: 0; }
-    .hamburger.active .bar3 { transform: rotate(45deg) translate(-5px, -6px); }
+    /* nav-links özel konumu */
+    .nav-links {
+        top: 80px; /* Navbar yüksekliği kadar aşağı kaydır */
+        display: none; /* Başlangıçta gizli */
+    }
+
+    /* auth-links özel konumu */
+    .auth-links {
+        top: calc(80px + var(--nav-links-height, 0px)); /* nav-links'in altına yerleştirilecek */
+        display: none; /* Başlangıçta gizli */
+    }
+    /* auth-links içindeki düğmelerin mobil menüde tam genişlik kaplamasını sağla */
+    .auth-links .btn-primary-nav,
+    .auth-links .btn-logout-icon {
+        width: 80%; /* Mobil menüde tam genişlik */
+        margin: 5px auto; /* Ortala */
+    }
+    .auth-links .nav-link-icon { /* Mobil menüde görünmelerini sağla */
+        display: flex;
+        justify-content: center;
+        padding: 15px 20px;
+        width: 100%;
+        color: #ecf0f1;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+    .auth-links .nav-link-icon:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 
     /* Navbar içindeki genel yapı */
     .main-nav-links {
-        width: 100%; /* Tam genişlik kapla */
-        order: 3; /* Navbar'da en sona at (aşağıya) */
-        flex-basis: 100%; /* Tam satır kapla */
-        display: flex; /* Flexbox kullan */
-        flex-direction: column; /* İçeriği alt alta sırala */
-        align-items: flex-end; /* Sağ tarafa yasla */
-    }
-
-    .main-nav-links .auth-links {
-        width: 100%; /* Kalan alanı kapla */
+        flex-grow: 1; /* Logodan sonra kalan alanı kapla */
         justify-content: flex-end; /* Sağ tarafa yasla */
-        padding-top: 10px; /* Üstten boşluk bırak */
     }
-    .main-nav-links .nav-links {
-        order: 1; /* Menü linklerini yukarı al */
-        align-items: center; /* Ortala */
-    }
-
-
-    /* Bilgi Kutuları */
-    .info-bar {
-        flex-direction: column; /* Kutuları alt alta sırala */
-        margin: 20px 3%; /* Yan boşlukları daralt */
-        padding: 15px; /* İç boşluğu azalt */
-        gap: 10px; /* Kutular arası boşluğu azalt */
-    }
-
-    .info-box {
-        width: 100%; /* Tam genişlik kapla */
-        text-align: center;
-        padding: 12px 15px; /* İç boşluğu azalt */
-        font-size: 14px;
-    }
-
-    /* İçerik Alanı */
-    .content-area {
-        flex-direction: column; /* Sütunları alt alta sırala */
-        padding: 20px 3%;
-    }
-
-    /* Formlar */
-    .form-container {
-        margin: 20px 3%;
-        padding: 20px;
-    }
-    .form-row-container {
-        flex-direction: column; /* Form sütunlarını alt alta sırala */
-        gap: 20px;
-    }
-
-    /* Kurs ve Öğrenci Tabloları */
-    .course-list-container {
-        padding: 20px 3%;
-    }
-    .course-table, .student-table {
-        display: block; /* Tabloyu blok seviyesi öğe yap */
-        overflow-x: auto; /* Eğer içerik sığmazsa yatay kaydırma çubuğu göster */
-        -webkit-overflow-scrolling: touch; /* iOS cihazlarda daha iyi kaydırma performansı */
-        width: 100%; /* Tam genişlik kapla */
-        border-collapse: collapse; /* İç kenarlıkları kaldır */
-        border: none; /* Tablonun dış kenarlığını kaldır */
-        box-shadow: none; /* Genel tablo gölgelendirmesini kaldır */
-    }
-    .course-table thead, .student-table thead {
-        display: none; /* Başlıkları gizle */
-    }
-    .course-table tr, .student-table tr {
-        display: block; /* Her satırı blok yap */
-        margin-bottom: 15px; /* Satırlar arası boşluk */
-        border: 1px solid #ddd; /* Her satır için ince kenarlık */
-        border-radius: 8px; /* Köşeleri yuvarla */
-        background-color: #fff; /* Arka plan rengi */
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Hafif gölge */
-    }
-    .course-table td, .student-table td {
-        display: block; /* Her hücreyi blok yap */
-        text-align: right; /* Değeri sağa yasla */
-        padding: 12px 15px; /* İç boşluğu ayarla */
-        position: relative;
-        padding-left: 50%; /* Başlık için yer aç */
-        border-bottom: 1px solid #eee; /* Hücreler arası ince çizgi */
-    }
-    .course-table td:last-child, .student-table td:last-child {
-        border-bottom: none; /* Son hücrede çizgi olmasın */
-    }
-    .course-table td::before, .student-table td::before {
-        content: attr(data-label); /* Başlığı veri etiketi olarak göster */
-        position: absolute;
-        left: 15px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
-        text-align: left;
-        font-weight: 600;
-        color: #555; /* Daha koyu renk */
-    }
-    /* İlk sütun için özel etiketler (örneğin "Yer / Saat") */
-    /* Lütfen buradaki 'content' değerlerini kendi tablo başlıklarınıza göre kontrol edin ve güncelleyin */
-    .course-table td:nth-of-type(1)::before { content: "Yer / Saat:"; }
-    .course-table td:nth-of-type(2)::before { content: "Sınıf Aralığı:"; }
-    .course-table td:nth-of-type(3)::before { content: "Kontenjan:"; }
-    .course-table td:nth-of-type(4)::before { content: "Kayıt:"; }
-    /* Eğer öğrenci tablonuzda farklı sütunlar varsa, onlar için de benzer kurallar eklemeniz gerekebilir */
 }
 
 /* Ekran Genişliği 768px ve altı (Küçük Tabletler ve Telefonlar) */
@@ -1192,20 +1066,22 @@ nav {
     .page-header h1 {
         font-size: 28px;
     }
-
     .logo img {
-        height: 50px;
-        width: 50px;
+        height: 60px;
+        width: 60px;
     }
-
-    .nav-links li a {
-        font-size: 13px;
-        padding: 12px 15px;
+    .nav-links li a,
+    .auth-links .btn-primary-nav,
+    .auth-links .btn-logout-icon,
+    .auth-links .nav-link-icon {
+        font-size: 12px;
+        padding: 6px 10px;
     }
-
-    .form-container {
-        max-width: 95%; /* Biraz daha geniş olabilir */
-        margin: 20px auto;
+    /* Tablo için data-label'ı 768px altında göster */
+    .course-table td::before, .student-table td::before {
+        display: inline-block; /* Başlıkların görünür olmasını sağla */
+        width: auto;
+        white-space: normal;
     }
 }
 
@@ -1214,16 +1090,13 @@ nav {
     body {
         font-size: 14px;
     }
-
     .page-header h1 {
         font-size: 24px;
     }
-
     .info-box {
         font-size: 13px;
         padding: 10px;
     }
-
     .course-table td, .student-table td {
         padding: 8px 10px; /* Daha az boşluk */
         font-size: 14px;
@@ -1231,12 +1104,10 @@ nav {
     .course-table td::before, .student-table td::before {
         font-size: 13px;
     }
-
     .btn-select, .btn-submit {
         font-size: 14px;
         padding: 10px;
     }
-
     .modal-content {
         padding: 20px 25px;
     }
