@@ -78,8 +78,13 @@ WSGI_APPLICATION = 'lidersite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Yerelde DATABASE_URL yoksa bu kullanılır
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', # MySQL motorunu kullan
+        'NAME': 'eminegitim$default',  # Kendi veritabanı adınız
+        'USER': 'eminegitim',         # Kendi kullanıcı adınız
+        'PASSWORD': '11033225018hHalil', # <-- BURAYA PYTHONANYWHERE MySQL ŞİFRENİZİ YAPIŞTIRIN!
+        'HOST': 'eminegitim.mysql.pythonanywhere-services.com', # Kendi host adresiniz
+        'PORT': '3306', # MySQL varsayılan portu
+        # 'OPTIONS': {'ssl': {'ssl_mode': 'REQUIRED'}}, # PythonAnywhere MySQL için genellikle SSL ayarına gerek yoktur, hata vermeye devam ederse kaldırırız.
     }
 }
 
