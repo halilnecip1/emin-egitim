@@ -19,35 +19,7 @@
         <div class="info-box"><strong>Ücret:</strong> {{ program.price }} ₺</div>
     </div>
 
-    <div class="content-area">
-        <div class="details-section">
-            <div class="poster-placeholder">
-                {% if program.poster %}
-                    <img src="{{ program.poster.url }}" alt="{{ program.title }} Afişi" style="width: 100%; height: auto; border-radius: 8px;">
-                {% else %}
-                    <p>Afiş Alanı</p>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="accordion-section">
-            {% for section in program.sections.all %}
-                <div class="accordion-item">
-                    <button class="accordion-header">{{ section.title }}</button>
-                    <div class="accordion-content">
-                        {{ section.content|safe }}
-                    </div>
-                </div>
-            {% endfor %}
-
-            <button class="info-button" id="how-to-register-btn">Eğitime Nasıl Kaydolacağım?</button>
-            
-            <div class="note-box">
-                <p>Not: Kurumumuz hiçbir ticari amaç gütmemektedir. Program giderlerimiz kurumumuza yapılan bağışlarla karşılanmaktadır.</p>
-            </div>
-        </div>
-    </div>
-
+    {# BURADAN BAŞLIYOR: ÖNCE KURS TABLOSU GELSİN #}
     {% if program.courses.all %}
     <div class="course-list-container">
         <h2>Kurslarımız</h2>
@@ -75,6 +47,40 @@
         </table>
     </div>
     {% endif %}
+    {# KURS TABLOSU BURADA BİTİYOR #}
+
+
+    {# SONRA DİĞER İÇERİK (AFİŞ VE AMAÇ KISMI) GELSİN #}
+    <div class="content-area">
+        <div class="details-section">
+            <div class="poster-placeholder">
+                {% if program.poster %}
+                    <img src="{{ program.poster.url }}" alt="{{ program.title }} Afişi" style="width: 100%; height: auto; border-radius: 8px;">
+                {% else %}
+                    <p>Afiş Alanı</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="accordion-section">
+            {% for section in program.sections.all %}
+                <div class="accordion-item">
+                    <button class="accordion-header">{{ section.title }}</button>
+                    <div class="accordion-content">
+                        {{ section.content|safe }}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <button class="info-button" id="how-to-register-btn">Eğitime Nasıl Kaydolacağım?</button>
+
+            <div class="note-box">
+                <p>Not: Kurumumuz hiçbir ticari amaç gütmemektedir. Program giderlerimiz kurumumuza yapılan bağışlarla karşılanmaktadır.</p>
+            </div>
+        </div>
+    </div>
+    {# DİĞER İÇERİK BURADA BİTİYOR #}
+
 
 {% else %}
     <div class="container" style="text-align: center; padding: 50px;">
