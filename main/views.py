@@ -1,23 +1,22 @@
 # main/views.py
 
 from django.shortcuts import render
-from .models import SummerProgram, Course # Course modelini de import edin
+from .models import SummerProgram # SummerProgram modelini import ettiğinizden emin olun
 
 def home_view(request):
-    """
-    Anasayfayı gösterecek olan view. Veritabanından TÜM programları ve TÜM kursları çeker
-    ve bunları 'home.html' şablonuna gönderir.
-    """
-    # Tüm programları başlangıç tarihine göre azalan sırada (en yeniler en başta) alıyoruz.
-    all_programs = SummerProgram.objects.all().order_by('-start_date') # veya order_by('-id')
-
-    # TÜM kursları tek bir liste olarak alıyoruz (örneğin yer/saate göre sıralanmış)
-    all_courses = Course.objects.all().order_by('venue_and_time')
+    program = None # Başlangıçta programı boş olarak ayarlıyoruz
+    try:
+        # Sadece 'is_active=True' olan ilk programı çekiyoruz.
+        # Eğer birden fazla aktif programınız varsa, .first() sadece birini seçer.
+        program = SummerProgram.objects.filter(is_active=True).first()
+        # Eğer program bulunamazsa (yani None gelirse), home.html'deki {% else %} bloğu çalışır.
+    except Exception as e:
+        # Herhangi bir beklenmedik hata oluşursa loglayabiliriz
+        print(f"Program çekilirken hata oluştu: {e}")
+        program = None # Hata durumunda programı boş bırak
 
     context = {
-        'programs': all_programs,   # Tüm SummerProgram nesneleri listesi
-        'all_courses': all_courses, # Tüm Course nesneleri listesi
-        # 'cart_item_count' gibi diğer context değişkenlerinizi de buraya eklemeyi unutmayın
+        'program': program, # Tekil 'program' nesnesini gönderiyoruz
     }
 
     return render(request, 'main/home.html', context)
