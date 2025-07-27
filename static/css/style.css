@@ -51,8 +51,8 @@ nav {
 
 /* YENİ KURAL: Logo resmini yuvarlak yapmak ve boyutlandırmak için */
 .logo img {
-    height: 45px;          /* Navbar yüksekliğiyle aynı */
-    width: 60px;           /* Daire için eşit genişlik */
+    height: 80px;          /* Navbar yüksekliğiyle aynı */
+    width: 80px;           /* Daire için eşit genişlik */
     border-radius: 50%;    /* Yuvarlak yapmak için */
     object-fit: cover;     /* Görseli orantılı kırpar */
     background-color: white;  /* Varsa boşluklar için arka plan */
