@@ -31,7 +31,7 @@
             <div class="main-nav-links">
                 <ul class="nav-links">
                     <li><a href="{% url 'home' %}">ANASAYFA</a></li>
-                    <li><a href="{% url 'programs' %}">PROGRAMLAR</a></li> {# PROGRAMLAR linkinin doğru URL'sini ekledim #}
+                    <li><a href="{% url 'home' %}">PROGRAMLAR</a></li> {# PROGRAMLAR linkinin doğru URL'sini ekledim #}
                 </ul>
                 <div class="auth-links">
                     {% if user.is_authenticated %}
