@@ -1131,3 +1131,119 @@ nav {
         font-size: 16px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Yeni Ana Program Detayları Bölümü */
+.all-programs-details-section {
+    padding: 20px 10%;
+    margin-top: 40px;
+}
+
+.program-block {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    margin-bottom: 40px; /* Her program bloğu arasında boşluk */
+    overflow: hidden; /* İçerik taşmasını engellemek için */
+    padding: 30px; /* İç boşluk ekle */
+}
+
+.program-header-info {
+    display: flex;
+    align-items: flex-start; /* Afiş ve bilgileri yukarıdan hizala */
+    gap: 30px; /* Afiş ile bilgiler arası boşluk */
+    margin-bottom: 30px; /* Bilgiler ile akordiyon arası boşluk */
+    flex-wrap: wrap; /* Küçük ekranlarda alt alta gelmeleri için */
+}
+
+.poster-display {
+    flex: 0 0 250px; /* Afiş için sabit genişlik (örnek) */
+    max-width: 100%;
+    border-radius: 8px;
+    overflow: hidden; /* Yuvarlak kenarlar için */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    background-color: #f0f0f0; /* Yüklenene kadar arkaplan */
+}
+
+.poster-display img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.program-compact-info {
+    flex-grow: 1; /* Geri kalan alanı kapla */
+    min-width: 250px; /* Küçük ekranlarda daralmaması için min-width */
+}
+
+.program-compact-info h3 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Bilgi kutucuklarını daha küçük ve kompakt yapalım */
+.info-box-compact {
+    background-color: #ffc107; /* Sarı */
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px; /* Alt alta boşluk */
+    display: inline-block; /* Yan yana durması için (küçük ekranlarda alt alta) */
+    margin-right: 10px; /* Yan yana boşluk */
+}
+.info-box-compact:last-child {
+    margin-right: 0;
+}
+
+/* Akordiyon Detayları */
+.program-accordion-details {
+    background: #f8f9fa; /* Hafif bir arka plan rengi */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* İç gölge */
+}
+.program-accordion-details h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* Mobil Uyumluluk İçin Ek CSS */
+@media (max-width: 768px) {
+    .program-header-info {
+        flex-direction: column; /* Afiş ve bilgileri alt alta getir */
+        align-items: center; /* Ortala */
+        gap: 20px;
+    }
+    .poster-display {
+        flex: none; /* Esnekliği kaldır */
+        width: 80%; /* Tam genişlik */
+    }
+    .program-compact-info {
+        min-width: auto; /* Kısıtlamayı kaldır */
+        text-align: center; /* Ortala */
+        width: 100%;
+    }
+    .info-box-compact {
+        display: block; /* Alt alta sırala */
+        margin: 0 auto 10px auto; /* Ortala ve boşluk ver */
+    }
+}
