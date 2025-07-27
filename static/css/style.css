@@ -145,7 +145,7 @@ nav {
 
 /* Sayfa Başlığı */
 .page-header {
-    height: 180px;
+    height: 120px;
     background-size: cover;
     background-position: center;
     display: flex;
