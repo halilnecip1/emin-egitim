@@ -11,7 +11,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'güvenli-bir-yerel-geliştirme-anahta
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1','.herokuapp.com', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1','.herokuapp.com', '.pythonanywhere.com', '.ondigitalocean.app']
 
 
 # Application definition
@@ -62,7 +62,7 @@ WSGI_APPLICATION = 'lidersite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3', # Yerel geliştirme için
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -70,8 +70,7 @@ DATABASES = {
 # PostgreSQL için DATABASE_URL'yi kullan
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
-    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
-
+    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL, conn_max_age=600, ssl_require=True)
 
 
 AUTH_PASSWORD_VALIDATORS = [
