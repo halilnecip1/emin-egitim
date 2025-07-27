@@ -961,3 +961,309 @@ nav {
 
 
 
+
+
+
+
+
+
+/* ========================================================= */
+/* ============= MOBİL UYUMLULUK (MEDIA QUERIES) ============= */
+/* ========================================================= */
+
+/* Ekran Genişliği 992px ve altı (Tabletler ve Daha Küçük Cihazlar) */
+@media (max-width: 992px) {
+    /* Genel Ayarlamalar */
+    body {
+        font-size: 15px; /* Okunabilirliği artır */
+    }
+
+    nav {
+        flex-wrap: wrap; /* Navbar öğelerini alt alta atmasını sağlar */
+        height: auto; /* Yüksekliği içeriğine göre ayarla */
+        padding: 10px 3%; /* Yan boşlukları daralt */
+    }
+
+    .logo img {
+        height: 60px; /* Logoyu küçült */
+        width: 60px;
+    }
+
+    /* Ana navigasyon linklerini gizle ve hamburger menü için hazırla */
+    .nav-links {
+        display: none; /* Varsayılan olarak gizle */
+        width: 100%; /* Tam genişlik kapla */
+        flex-direction: column; /* Linkleri alt alta sırala */
+        background-color: #480048; /* Navbar rengiyle aynı arka plan */
+        position: absolute;
+        top: 80px; /* Navbar'ın altından başla */
+        left: 0;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+        padding: 10px 0;
+    }
+
+    .nav-links.active {
+        display: flex; /* Aktif olduğunda göster */
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        padding: 15px 20px;
+        width: 100%;
+        display: block;
+    }
+
+    .auth-links {
+        /* Mobil görünümde ikonları gizleyip sadece butonları gösterebiliriz */
+        display: flex; /* Gerekirse gizleyin veya düzenleyin */
+        flex-grow: 1; /* Sağ tarafta boşluk bırakmak için esne */
+        justify-content: flex-end; /* Sağ tarafa yasla */
+        gap: 10px; /* Boşluğu azalt */
+    }
+
+    .nav-link-icon {
+        display: none; /* İkonlu linkleri mobil görünümde gizle */
+    }
+    
+    .btn-primary-nav {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .btn-logout-icon {
+        font-size: 13px;
+        padding: 6px 12px; /* Buton gibi davranması için padding ekleyelim */
+        border: 1px solid #e74c3c; /* Daha belirgin olsun */
+        border-radius: 5px;
+    }
+    .btn-logout-icon:hover {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+
+    /* Hamburger Menü İkonu (Yeni Eklenecek) */
+    .hamburger {
+        display: block; /* Mobil görünümde göster */
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+        margin-left: 20px; /* Auth linklerinden biraz boşluk */
+    }
+    .hamburger-icon {
+        display: flex; /* İçindeki çubukları hizalamak için */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+    }
+    .hamburger-icon div {
+        width: 100%;
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+    /* Hamburger menü açıldığında X işaretine dönüşümü */
+    .hamburger.active .bar1 { transform: rotate(-45deg) translate(-5px, 6px); }
+    .hamburger.active .bar2 { opacity: 0; }
+    .hamburger.active .bar3 { transform: rotate(45deg) translate(-5px, -6px); }
+
+
+    /* Bilgi Kutuları */
+    .info-bar {
+        flex-direction: column; /* Kutuları alt alta sırala */
+        margin: 20px 3%; /* Yan boşlukları daralt */
+        padding: 15px; /* İç boşluğu azalt */
+        gap: 10px; /* Kutular arası boşluğu azalt */
+    }
+
+    .info-box {
+        width: 100%; /* Tam genişlik kapla */
+        text-align: center;
+        padding: 12px 15px; /* İç boşluğu azalt */
+        font-size: 14px;
+    }
+
+    /* İçerik Alanı */
+    .content-area {
+        flex-direction: column; /* Sütunları alt alta sırala */
+        padding: 20px 3%;
+    }
+
+    /* Formlar */
+    .form-container {
+        margin: 20px 3%;
+        padding: 20px;
+    }
+    .form-row-container {
+        flex-direction: column; /* Form sütunlarını alt alta sırala */
+        gap: 20px;
+    }
+
+    /* Kurs Tablosu */
+    .course-list-container {
+        padding: 20px 3%;
+    }
+    .course-table, .student-table {
+        display: block; /* Tabloyu responsive hale getir */
+        overflow-x: auto; /* Yatay kaydırma çubuğu ekle */
+        white-space: nowrap; /* İçeriğin kaymasını engelle */
+    }
+    .course-table thead, .student-table thead {
+        display: none; /* Başlıkları gizle (mobil için genellikle daha iyi) */
+    }
+    .course-table tr, .student-table tr {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+    .course-table td, .student-table td {
+        display: block; /* Her hücreyi blok yap */
+        text-align: right; /* Değeri sağa yasla */
+        padding: 10px 15px; /* İç boşluğu ayarla */
+        position: relative;
+        padding-left: 50%; /* Başlık için yer aç */
+    }
+    .course-table td::before, .student-table td::before {
+        content: attr(data-label); /* Başlığı veri etiketi olarak göster */
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: #6c757d;
+    }
+    /* İlk sütun için özel etiketler (örneğin "Yer / Saat") */
+    .course-table td:nth-of-type(1)::before { content: "Yer / Saat:"; }
+    .course-table td:nth-of-type(2)::before { content: "Sınıf Aralığı:"; }
+    .course-table td:nth-of-type(3)::before { content: "Kontenjan:"; }
+    .course-table td:nth-of-type(4)::before { content: "Kayıt:"; }
+
+    /* Dashboard Düzenlemesi */
+    .dashboard-content {
+        flex-direction: column; /* Menü ve içerik alt alta */
+        padding: 0 3% 40px 3%;
+    }
+    .dashboard-nav {
+        flex: auto; /* Genişliği içeriğine göre ayarla */
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 10px;
+        box-shadow: none; /* Gölgelendirmeyi kaldır */
+        border: 1px solid #eee; /* İnce bir çerçeve ekle */
+    }
+    .dashboard-nav a {
+        padding: 10px 12px;
+        font-size: 14px;
+        text-align: center; /* Menü linklerini ortala */
+        margin-bottom: 3px;
+    }
+    .dashboard-main {
+        padding: 20px;
+    }
+
+    /* Ödeme Sayfası (Checkout) */
+    .checkout-main {
+        flex-direction: column; /* Eğitimler ve özet alt alta */
+        padding: 0 3% 40px 3%;
+    }
+    .checkout-summary {
+        flex: auto; /* Sabit genişliği kaldır */
+        width: 100%;
+        position: static; /* Sticky'i kaldır */
+        margin-top: 20px;
+    }
+    .checkout-item {
+        flex-direction: column; /* Öğeler alt alta */
+        align-items: flex-start;
+        padding: 15px;
+    }
+    .item-price {
+        margin-left: 0;
+        margin-top: 10px;
+        align-self: flex-end; /* Fiyatı sağa yasla */
+    }
+}
+
+/* Ekran Genişliği 768px ve altı (Küçük Tabletler ve Telefonlar) */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .logo img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .nav-links li a {
+        font-size: 13px;
+        padding: 12px 15px;
+    }
+
+    .form-container {
+        max-width: 95%; /* Biraz daha geniş olabilir */
+        margin: 20px auto;
+    }
+}
+
+/* Ekran Genişliği 480px ve altı (Çok Küçük Telefonlar) */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .info-box {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    .course-table td, .student-table td {
+        padding: 8px 10px; /* Daha az boşluk */
+        font-size: 14px;
+    }
+    .course-table td::before, .student-table td::before {
+        font-size: 13px;
+    }
+
+    .btn-select, .btn-submit {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .modal-content {
+        padding: 20px 25px;
+    }
+    .modal-content h3 {
+        font-size: 20px;
+    }
+    .modal-content p {
+        font-size: 14px;
+    }
+    .modal-actions .btn-submit, 
+    .modal-actions .btn-secondary {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    #add-to-cart-form select {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    #add-to-cart-form .btn-submit {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
