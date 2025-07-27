@@ -1059,76 +1059,142 @@ nav {
         flex-grow: 1; /* Logodan sonra kalan alanı kapla */
         justify-content: flex-end; /* Sağ tarafa yasla */
     }
-}
+
+    /* === YENİ MOBİL DÜZENLEMELER BURADAN BAŞLIYOR === */
+
+    /* Program başlığı ve bilgi kutuları (her program bloğu için) */
+    .program-block .page-header {
+        height: 150px; /* Mobil banner yüksekliğini azalt */
+        margin: -20px -20px 20px -20px; /* Program-block padding'ine göre ayarla */
+    }
+    .program-block .page-header h1 {
+        font-size: 24px; /* Başlık font boyutunu küçült */
+    }
+
+    .program-block .info-bar { /* Eskiden geneldi, şimdi her program bloğu içinde */
+        flex-direction: column; /* Bilgi kutularını alt alta sırala */
+        width: 90%; /* Tam genişlik */
+        margin: -10px auto 20px auto; /* Üst boşluğu ve alt boşluğu ayarla */
+        gap: 10px; /* Alt alta gelen kutular arası boşluk */
+        padding: 10px; /* İç boşluğu azalt */
+    }
+    .info-box { /* Bu genel info-box ve .info-box-compact'ı etkiler */
+        font-size: 14px;
+        padding: 10px 15px;
+        width: 100%; /* Mobil cihazlarda tam genişlik olsun */
+        text-align: center; /* İçeriği ortala */
+    }
+    .info-box-compact { /* .program-compact-info içindeki infobox'lar için */
+        font-size: 14px; /* Font boyutunu biraz küçült */
+        padding: 10px 15px; /* İç boşluğu ayarla */
+        width: 100%; /* Mobil cihazlarda tam genişlik olsun */
+        margin: 0 auto 8px auto; /* Ortala ve alt boşluk ver */
+    }
+
+    /* Afiş ve Akordiyon Detayları için Yeni Esnek Kapsayıcı */
+    .program-content-details {
+        flex-direction: column; /* Afiş ve akordiyonu alt alta getir */
+        align-items: center; /* Ortala */
+        gap: 20px; /* Aralarındaki boşluğu ayarla */
+    }
+
+    .poster-display {
+        flex: none; /* Esnekliği kaldır */
+        width: 90%; /* Daha küçük ekranlarda daha geniş afiş */
+        max-width: 350px; /* Afişin çok büyümesini engelle */
+    }
+    .program-compact-info {
+        min-width: auto; /* Minimum genişliği kaldır */
+        width: 90%; /* Kalan alanı kapla */
+        text-align: center; /* İçeriği ortala */
+    }
+
+    /* Akordiyon bölümü */
+    .program-accordion-details {
+        width: 100%; /* Mobil ekranlarda tam genişlik */
+        padding: 20px; /* İç boşluğu azalt */
+    }
+    .accordion-header {
+        font-size: 15px;
+        padding: 15px 15px;
+    }
+    .accordion-content {
+        padding: 0 15px;
+    }
+    .accordion-header.active + .accordion-content {
+        padding: 15px;
+    }
+
+    /* Genel İçerik Alanı */
+    .content-area { /* Eski content-area, eğer kullanılıyorsa mobil için */
+        flex-direction: column;
+        padding: 10px 5%;
+        gap: 15px;
+    }
+    .details-section, .accordion-section {
+        flex: none; /* Esnekliği kaldır */
+        width: 100%;
+        padding: 15px;
+    }
+    /* === YENİ MOBİL DÜZENLEMELER BURADA BİTİYOR === */
+    }
 
 /* Ekran Genişliği 768px ve altı (Küçük Tabletler ve Telefonlar) */
 @media (max-width: 768px) {
-    .page-header h1 {
-        font-size: 28px;
+    /* ... (mevcut kodlarınız) ... */
+
+    .program-block .page-header h1 {
+        font-size: 22px; /* Başlığı daha da küçült */
     }
-    .logo img {
-        height: 60px;
-        width: 60px;
+    .info-box, .info-box-compact {
+        font-size: 12px; /* Bilgi kutularını daha da küçült */
     }
-    .nav-links li a,
-    .auth-links .btn-primary-nav,
-    .auth-links .btn-logout-icon,
-    .auth-links .nav-link-icon {
-        font-size: 12px;
-        padding: 6px 10px;
+    .program-compact-info h3 {
+        font-size: 20px; /* Program başlığını küçült */
     }
-    /* Tablo için data-label'ı 768px altında göster */
-    .course-table td::before, .student-table td::before {
-        display: inline-block; /* Başlıkların görünür olmasını sağla */
-        width: auto;
-        white-space: normal;
+    .accordion-header {
+        font-size: 13px;
+    }
+    .program-accordion-details h2 {
+        font-size: 17px;
+    }
+    .all-programs-details-section,
+    .course-list-container {
+        padding: 10px 3%; /* Yan boşlukları daha da daralt */
     }
 }
 
 /* Ekran Genişliği 480px ve altı (Çok Küçük Telefonlar) */
 @media (max-width: 480px) {
-    body {
-        font-size: 14px;
+    /* ... (mevcut kodlarınız) ... */
+
+    .program-block {
+        padding: 10px; /* Daha da az boşluk */
     }
-    .page-header h1 {
-        font-size: 24px;
+    .program-block .page-header {
+        height: 100px; /* En küçük ekranlar için banner yüksekliği */
     }
-    .info-box {
-        font-size: 13px;
-        padding: 10px;
-    }
-    .course-table td, .student-table td {
-        padding: 8px 10px; /* Daha az boşluk */
-        font-size: 14px;
-    }
-    .course-table td::before, .student-table td::before {
-        font-size: 13px;
-    }
-    .btn-select, .btn-submit {
-        font-size: 14px;
-        padding: 10px;
-    }
-    .modal-content {
-        padding: 20px 25px;
-    }
-    .modal-content h3 {
-        font-size: 20px;
-    }
-    .modal-content p {
-        font-size: 14px;
-    }
-    .modal-actions .btn-submit, 
-    .modal-actions .btn-secondary {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-    #add-to-cart-form select {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-    #add-to-cart-form .btn-submit {
-        padding: 12px;
+    .program-block .page-header h1 {
         font-size: 16px;
+    }
+    .poster-display {
+        width: 100%; /* Neredeyse tam genişlik */
+    }
+    .info-box, .info-box-compact {
+        padding: 8px 10px; /* Çok küçük ekranlarda daha az padding */
+    }
+    .program-compact-info h3 {
+        font-size: 18px;
+    }
+    .accordion-header {
+        font-size: 12px;
+        padding: 12px 12px;
+    }
+    .accordion-content {
+        padding: 0 12px;
+    }
+    .accordion-header.active + .accordion-content {
+        padding: 12px;
     }
 }
 
