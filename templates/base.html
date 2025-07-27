@@ -92,18 +92,7 @@
                 }
             });
 
-            // Eğer "PROGRAMLAR" linki aktif değilse (yani bir URL'si yoksa)
-            // Bu linki tıklanabilir hale getirmek için JavaScript ekleyin.
-            // Eğer programs linkiniz zaten doğru bir URL'ye gidiyorsa bu kısma ihtiyacınız yok.
-            // Örn: <a href="{% url 'programs' %}">PROGRAMLAR</a>
-            const programsLink = document.querySelector('a[href="#"]'); // Eğer programs linki hala # ise
-            if (programsLink) {
-                programsLink.addEventListener('click', function(e) {
-                    e.preventDefault(); // Sayfanın yukarı kaymasını engelle
-                    // İsterseniz burada bir uyarı gösterebilirsiniz.
-                    // alert('PROGRAMLAR sayfası henüz aktif değil.');
-                });
-            }
+            
         });
     </script>
 
