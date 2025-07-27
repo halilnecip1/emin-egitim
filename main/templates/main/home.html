@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    {# Sadece program yoksa gösterilecek hoş geldiniz mesajı #}
+    {# Sadece program veya kurs yoksa gösterilecek hoş geldiniz mesajı #}
     {% if not programs and not all_courses %}
         <div class="container" style="text-align: center; padding: 50px;">
             <h1>Hoş Geldiniz!</h1>
@@ -53,59 +53,58 @@
 
                 {# Her program bloğu için kapsayıcı, boşluk ve gölge ekleyebiliriz #}
                 <div class="program-block"> 
-                    <div class="program-header-info"> {# Afiş ve bilgi kutularını yan yana tutmak için #}
+
+                    {# BURASI TAŞINAN KISIM: Her programın kendi başlığı ve bilgi çubuğu #}
+                    <div class="page-header" style="background-image: url('{% static 'img/banner.jpg' %}');">
+                        <h1>{{ program.title }}</h1> {# Programın başlığı #}
+                    </div>
+
+                    <div class="info-bar">
+                        <div class="info-box"><strong>Konum:</strong> {{ program.location }}</div>
+                        <div class="info-box">
+                            <strong>Başlangıç / Bitiş:</strong>
+                            {{ program.start_date|date:"d M" }} - {{ program.end_date|date:"d M Y" }}
+                        </div>
+                        <div class="info-box"><strong>Ücret:</strong> {{ program.price }} ₺</div>
+                    </div>
+                    {# TAŞINAN KISIM BURADA BİTİYOR #}
+                    
+                    <div class="program-content-details"> {# Afiş ve akordiyon detaylarını yan yana tutmak için yeni bir kapsayıcı #}
                         <div class="poster-display"> {# Afişi tutan kısım #}
                             {% if program.poster %}
+                                {# Admin panelinden yüklenen afişin URL'si #}
                                 <img src="{{ program.poster.url }}" alt="{{ program.title }} Afişi">
                             {% else %}
+                                {# Afiş yüklenmediyse varsayılan bir görsel gösterin (static'ten) #}
+                                {# Bu görseli static/img klasörünüze eklemeyi unutmayın #}
                                 <img src="{% static 'img/varsayilan_program_afisi.jpg' %}" alt="Varsayılan Program Afişi">
                             {% endif %}
                         </div>
 
-                        <div class="program-compact-info"> {# Bilgi kutucuklarını tutan kısım #}
-                            <h3>{{ program.title }}</h3> {# Program başlığı #}
-                            <div class="info-box-compact"><strong>Konum:</strong> {{ program.location }}</div>
-                            <div class="info-box-compact">
-                                <strong>Başlangıç / Bitiş:</strong>
-                                {{ program.start_date|date:"d M" }} - {{ program.end_date|date:"d M Y" }}
-                            </div>
-                            <div class="info-box-compact"><strong>Ücret:</strong> {{ program.price }} ₺</div>
-                            
-                            {# Eğer programın kendine özgü kurslarını burada da göstermek isterseniz (isteğe bağlı) #}
-                            {# {% if program.courses.all %}
-                            {#     <p>Bu programa ait kurslar:</p>
-                            {#     <ul>
-                            {#         {% for course in program.courses.all %}
-                            {#             <li>{{ course.venue_and_time }} - {{ course.grade_range }}</li>
-                            {#         {% endfor %}
-                            {#     </ul>
-                            {# {% endif %} #}
-                        </div>
-                    </div> {# .program-header-info kapanışı #}
-
-                    {# Akordiyon Bölümleri (Amaç, Kazanımlar vb.) #}
-                    <div class="program-accordion-details"> 
-                        {% if program.sections.all %}
-                        <h2>Detaylar</h2> {# Akordiyon bölümü için genel başlık #}
-                        {% for section in program.sections.all %}
-                            <div class="accordion-item">
-                                <button class="accordion-header">{{ section.title }}</button>
-                                <div class="accordion-content">
-                                    {{ section.content|safe }}
+                        {# Akordiyon Bölümleri (Amaç, Kazanımlar vb.) #}
+                        <div class="program-accordion-details"> 
+                            {% if program.sections.all %}
+                            <h2>Detaylar</h2> {# Akordiyon bölümü için genel başlık #}
+                            {% for section in program.sections.all %}
+                                <div class="accordion-item">
+                                    <button class="accordion-header">{{ section.title }}</button>
+                                    <div class="accordion-content">
+                                        {{ section.content|safe }}
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                        {% endif %}
+                            {% endfor %}
+                            {% endif %} 
 
-                        <button class="info-button" id="how-to-register-btn-{{ program.id }}" data-program-id="{{ program.id }}">Eğitime Nasıl Kaydolacağım?</button>
-                        <div class="note-box">
-                            <p>Not: Kurumumuz hiçbir ticari amaç gütmemektedir. Program giderlerimiz kurumumuza yapılan bağışlarla karşılanmaktadır.</p>
-                        </div>
-                    </div> {# .program-accordion-details kapanışı #}
+                            <button class="info-button" id="how-to-register-btn-{{ program.id }}" data-program-id="{{ program.id }}">Eğitime Nasıl Kaydolacağım?</button>
+                            <div class="note-box">
+                                <p>Not: Kurumumuz hiçbir ticari amaç gütmemektedir. Program giderlerimiz kurumumuza yapılan bağışlarla karşılanmaktadır.</p>
+                            </div>
+                        </div> {# .program-accordion-details kapanışı #}
+                    </div> {# .program-content-details kapanışı #}
 
                 </div> {# .program-block kapanışı #}
 
-                {# Programlar arasına daha belirgin bir ayırıcı #}
+                {# Her program bloğundan sonra bir ayırıcı ekleyebilirsiniz (son program hariç) #}
                 {% if not forloop.last %}<hr style="margin: 60px auto; width: 90%; border-top: 2px dashed #ccc;">{% endif %}
 
             {% endfor %} {# Program döngüsünün sonu #}
@@ -113,7 +112,7 @@
     {% endif %}
 
 
-    {# Modallarınız buraya eklenmeye devam ediyor, ana sayfa içeriğinin dışında olmalılar #}
+    {# Modallarınız buraya eklenmeye devam ediyor, bu dış döngülerin dışında olmalılar #}
     <div id="student-select-modal" class="modal-overlay" style="display: none;">
         </div>
     <div id="how-to-register-modal" class="modal-overlay" style="display: none;">

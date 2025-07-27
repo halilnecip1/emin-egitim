@@ -1145,7 +1145,9 @@ nav {
 
 
 
-/* Yeni Ana Program Detayları Bölümü */
+/* style.css dosyanızda uygun yerlere ekleyin/güncelleyin */
+
+/* Yeni Genel Program Detayları Bölümü */
 .all-programs-details-section {
     padding: 20px 10%;
     margin-top: 40px;
@@ -1160,21 +1162,57 @@ nav {
     padding: 30px; /* İç boşluk ekle */
 }
 
-.program-header-info {
+/* Her program için üstteki başlık ve info-bar (yeniden konumlandırıldı) */
+.program-block .page-header {
+    /* Bu, her program bloğunun başındaki banner */
+    height: 180px; /* İstediğiniz yüksekliği ayarlayın */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     display: flex;
-    align-items: flex-start; /* Afiş ve bilgileri yukarıdan hizala */
-    gap: 30px; /* Afiş ile bilgiler arası boşluk */
-    margin-bottom: 30px; /* Bilgiler ile akordiyon arası boşluk */
+    align-items: center;
+    justify-content: center;
+    margin: -30px -30px 20px -30px; /* Program-block'un padding'ine uygun negatif margin */
+    border-radius: 12px 12px 0 0; /* Üst köşeleri yuvarlak tut */
+}
+
+.program-block .page-header h1 {
+    font-size: 36px; /* Program başlığının boyutu */
+    margin: 0;
+}
+
+.program-block .info-bar {
+    /* Her program bloğu içinde bilgi kutucukları */
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 20px; /* Daha az padding */
+    background-color: #fff; /* Beyaz arkaplan */
+    margin: -20px auto 30px auto; /* Afiş/akordiyon ile boşluk */
+    position: relative;
+    z-index: 10;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 80%; /* Daha dar olsun */
+    max-width: 700px;
+}
+
+/* Afiş ve Akordiyon Detayları için Yeni Esnek Kapsayıcı */
+.program-content-details {
+    display: flex;
+    gap: 30px; /* Afiş ve akordiyon arasında boşluk */
     flex-wrap: wrap; /* Küçük ekranlarda alt alta gelmeleri için */
+    align-items: flex-start; /* İçeriği yukarıdan hizala */
 }
 
 .poster-display {
-    flex: 0 0 250px; /* Afiş için sabit genişlik (örnek) */
-    max-width: 100%;
+    flex: 0 0 300px; /* Afiş için sabit genişlik */
+    max-width: 100%; /* Küçük ekranlarda taşmasını engelle */
     border-radius: 8px;
-    overflow: hidden; /* Yuvarlak kenarlar için */
+    overflow: hidden;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    background-color: #f0f0f0; /* Yüklenene kadar arkaplan */
+    background-color: #f0f0f0;
 }
 
 .poster-display img {
@@ -1183,41 +1221,16 @@ nav {
     display: block;
 }
 
-.program-compact-info {
-    flex-grow: 1; /* Geri kalan alanı kapla */
-    min-width: 250px; /* Küçük ekranlarda daralmaması için min-width */
-}
-
-.program-compact-info h3 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-/* Bilgi kutucuklarını daha küçük ve kompakt yapalım */
-.info-box-compact {
-    background-color: #ffc107; /* Sarı */
-    color: #333;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 10px; /* Alt alta boşluk */
-    display: inline-block; /* Yan yana durması için (küçük ekranlarda alt alta) */
-    margin-right: 10px; /* Yan yana boşluk */
-}
-.info-box-compact:last-child {
-    margin-right: 0;
-}
-
-/* Akordiyon Detayları */
+/* Akordiyon bölümünü genişlet */
 .program-accordion-details {
-    background: #f8f9fa; /* Hafif bir arka plan rengi */
+    flex-grow: 1; /* Kalan alanı kapla */
+    min-width: 300px; /* Akordiyonun daralmamasını sağlar */
+    background: #f8f9fa;
     padding: 25px;
     border-radius: 8px;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* İç gölge */
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
 }
+
 .program-accordion-details h2 {
     font-size: 20px;
     color: #333;
@@ -1226,24 +1239,32 @@ nav {
     padding-bottom: 10px;
 }
 
-/* Mobil Uyumluluk İçin Ek CSS */
+/* Mobil Uyumluluk İçin Ek CSS (Bu yeni yapıya uygun) */
 @media (max-width: 768px) {
-    .program-header-info {
-        flex-direction: column; /* Afiş ve bilgileri alt alta getir */
+    .program-header-info,
+    .program-content-details {
+        flex-direction: column; /* Alt alta sırala */
         align-items: center; /* Ortala */
         gap: 20px;
     }
     .poster-display {
-        flex: none; /* Esnekliği kaldır */
-        width: 80%; /* Tam genişlik */
+        flex: none;
+        width: 90%; /* Daha küçük ekranlarda daha geniş afiş */
     }
-    .program-compact-info {
-        min-width: auto; /* Kısıtlamayı kaldır */
-        text-align: center; /* Ortala */
-        width: 100%;
+    .program-compact-info,
+    .program-accordion-details {
+        min-width: auto;
+        width: 90%; /* Tam genişlik */
+        text-align: center;
+    }
+    .program-block .info-bar {
+        flex-direction: column;
+        width: 90%;
+        margin: -20px auto 20px auto;
+        gap: 10px;
     }
     .info-box-compact {
-        display: block; /* Alt alta sırala */
-        margin: 0 auto 10px auto; /* Ortala ve boşluk ver */
+        width: 100%; /* Kutucuklar alt alta tam genişlik */
+        margin: 0 auto 5px auto;
     }
 }
