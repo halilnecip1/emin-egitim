@@ -1126,95 +1126,230 @@ nav {
     width: 100%;
     padding: 15px;
 }
-/* === YENİ MOBİL DÜZENLEMELER BURADA BİTİYOR === */
+
+
+/* ========================================================= */
+/* ============= MOBİL UYUMLULUK (MEDIA QUERIES) ============= */
+/* ========================================================= */
+
+/* Ekran Genişliği 992px ve altı (Tabletler ve Daha Küçük Cihazlar) */
+@media (max-width: 992px) {
+    /* Navbar öğelerinin genel küçülmesi */
+    .nav-links li a,
+    .nav-link-icon,
+    .btn-primary-nav,
+    .btn-logout-icon {
+        font-size: 12px; /* Fontları biraz daha küçült */
+        padding: 6px 10px; /* İç boşlukları daralt */
+        gap: 3px; /* İkon ve metin arası boşluğu daralt */
+        white-space: nowrap; /* Metnin tek satırda kalmasını sağla */
+    }
+    .logo img {
+        height: 60px; /* Logoyu küçült */
+        width: 60px;
+    }
+    nav {
+        height: auto; /* İçerik taştığında yüksekliği otomatik ayarla */
+        padding: 10px 2%; /* Yan boşlukları daha da daralt */
+        flex-wrap: wrap; /* Öğeler sığmadığında alt satıra geçsin */
+        justify-content: center; /* Öğeleri ortaya hizala */
+    }
+    .main-nav-links {
+        width: 100%; /* Tam genişlik kapla */
+        justify-content: center; /* Öğeleri ortaya hizala */
+        margin-top: 10px; /* Logodan sonra boşluk */
+        gap: 10px; /* Gruplar arası boşluk */
+        flex-wrap: wrap; /* Öğeler sığmadığında alt satıra geçsin */
+    }
+
+    /* Navbar link grupları (ANASAYFA/PROGRAMLAR) */
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px; /* Linkler arası boşluğu daha da daralt */
+        margin-bottom: 5px; /* Altındaki grup ile boşluk */
+    }
+
+    /* Giriş/Kayıt, Sepet, Çıkış gibi kimlik doğrulama link grupları */
+    .auth-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px; /* Linkler arası boşluğu daha da daralt */
+        margin-top: 5px; /* Üstündeki grup ile boşluk */
+    }
+
+    /* === YENİ MOBİL DÜZENLEMELER BURADAN BAŞLIYOR === */
+    /* Program başlığı ve bilgi kutuları (her program bloğu için) */
+    .program-block .page-header {
+        height: 120px; /* Mobil banner yüksekliğini azalt */
+        margin: -20px -20px 15px -20px; /* Program-block padding'ine göre ayarla */
+    }
+    .program-block .page-header h1 {
+        font-size: 20px; /* Başlık font boyutunu küçült */
+        padding: 0 10px; /* Küçük ekranlarda başlık için yan boşluk */
+    }
+
+    .program-block .info-bar { 
+        flex-direction: column; /* Bilgi kutularını alt alta sırala */
+        width: 95%; /* Biraz daha geniş olsun */
+        margin: -10px auto 15px auto; /* Üst boşluğu ve alt boşluğu ayarla */
+        gap: 8px; /* Alt alta gelen kutular arası boşluk */
+        padding: 8px; /* İç boşluğu azalt */
+    }
+    .info-box {
+        font-size: 13px;
+        padding: 8px 12px;
+        width: 100%; /* Mobil cihazlarda tam genişlik olsun */
+        text-align: center;
+    }
+    .info-box-compact { /* .program-compact-info içindeki infobox'lar için */
+        font-size: 13px; /* Font boyutunu biraz küçült */
+        padding: 8px 12px; /* İç boşluğu ayarla */
+        width: 100%; /* Mobil cihazlarda tam genişlik olsun */
+        margin: 0 auto 5px auto; /* Ortala ve alt boşluk ver */
+    }
+
+    /* Afiş ve Akordiyon Detayları için Esnek Kapsayıcı */
+    .program-content-details {
+        flex-direction: column; /* Afiş ve akordiyonu alt alta getir */
+        align-items: center; /* Ortala */
+        gap: 15px; /* Aralarındaki boşluğu daralt */
+    }
+
+    .poster-display {
+        width: 95%; /* Daha küçük ekranlarda daha geniş afiş */
+        max-width: 320px; /* Afişin çok büyümesini engelle */
+    }
+    .program-compact-info {
+        width: 95%; /* Kalan alanı kapla */
+        text-align: center;
+    }
+
+    /* Akordiyon bölümü */
+    .program-accordion-details {
+        width: 100%; /* Mobil ekranlarda tam genişlik */
+        padding: 15px; /* İç boşluğu azalt */
+    }
+    .accordion-header {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+    .accordion-content {
+        padding: 0 15px;
+    }
+    .accordion-header.active + .accordion-content {
+        padding: 15px;
+    }
+
+    /* Genel İçerik Alanı */
+    .all-programs-details-section,
+    .course-list-container {
+        padding: 15px 3%; /* Yan boşlukları daha da daralt */
+    }
+
+    .content-area { /* Eski content-area, eğer kullanılıyorsa mobil için */
+        flex-direction: column;
+        padding: 10px 3%;
+        gap: 10px;
+    }
+    .details-section, .accordion-section {
+        width: 100%;
+        padding: 15px;
+    }
+    /* === YENİ MOBİL DÜZENLEMELER BURADA BİTİYOR === */
 }
 
 /* Ekran Genişliği 768px ve altı (Küçük Tabletler ve Telefonlar) */
 @media (max-width: 768px) {
-    .page-header h1 {
-        font-size: 28px;
-    }
-    .logo img {
-        height: 60px;
-        width: 60px;
-    }
-    .nav-links li a,
-    .auth-links .btn-primary-nav,
-    .auth-links .btn-logout-icon,
-    .auth-links .nav-link-icon {
-        font-size: 12px;
-        padding: 6px 10px;
-    }
-    /* Tablo için data-label'ı 768px altında göster */
-    .course-table td::before, .student-table td::before {
-        display: inline-block; /* Başlıkların görünür olmasını sağla */
-        width: auto;
-        white-space: normal;
-    }
-    .program-block .page-header h1 {
-        font-size: 22px; /* Başlığı daha da küçült */
-    }
-    .info-box, .info-box-compact {
-        font-size: 12px; /* Bilgi kutularını daha da küçült */
-    }
-    .program-compact-info h3 {
-        font-size: 20px; /* Program başlığını küçült */
-    }
-    .accordion-header {
-        font-size: 13px;
-    }
-    .program-accordion-details h2 {
-        font-size: 17px;
-    }
-    .all-programs-details-section,
-    .course-list-container {
-        padding: 10px 3%; /* Yan boşlukları daha da daralt */
-    }
+    .page-header h1 {
+        font-size: 20px; /* Başlığı daha da küçült */
+    }
+    .logo img {
+        height: 50px; /* Logoyu daha da küçült */
+        width: 50px;
+    }
+    .nav-links li a,
+    .nav-link-icon,
+    .btn-primary-nav,
+    .btn-logout-icon {
+        font-size: 10px; /* Fontları daha da küçült */
+        padding: 4px 6px; /* Boşlukları daha da daralt */
+    }
+    .info-box, .info-box-compact {
+        font-size: 11px; /* Bilgi kutularını daha da küçült */
+        padding: 6px 10px;
+    }
+    .program-compact-info h3 {
+        font-size: 18px; /* Program başlığını küçült */
+    }
+    .accordion-header {
+        font-size: 12px;
+        padding: 10px 10px;
+    }
+    .program-accordion-details h2 {
+        font-size: 16px;
+    }
+    .all-programs-details-section,
+    .course-list-container {
+        padding: 10px 2%; /* Yan boşlukları daha da daralt */
+    }
 }
 
 /* Ekran Genişliği 480px ve altı (Çok Küçük Telefonlar) */
 @media (max-width: 480px) {
-    body {
-        font-size: 14px;
-    }
-    .page-header h1 {
-        font-size: 24px;
-    }
-    .info-box {
-        font-size: 13px;
-        padding: 10px;
-    }
-    .course-table td, .student-table td {
-        padding: 8px 10px; /* Daha az boşluk */
-        font-size: 14px;
-    }
-    .course-table td::before, .student-table td::before {
-        font-size: 13px;
-    }
-    .btn-select, .btn-submit {
-        font-size: 14px;
-        padding: 10px;
-    }
-    .modal-content {
-        padding: 20px 25px;
-    }
-    .modal-content h3 {
-        font-size: 20px;
-    }
-    .modal-content p {
-        font-size: 14px;
-    }
-    .modal-actions .btn-submit, 
-    .modal-actions .btn-secondary {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-    #add-to-cart-form select {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-    #add-to-cart-form .btn-submit {
-        padding: 12px;
-        font-size: 16px;
-    }
+    body {
+        font-size: 13px;
+    }
+    .program-block {
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    .program-block .page-header {
+        height: 80px; /* En küçük ekranlar için banner yüksekliği */
+    }
+    .program-block .page-header h1 {
+        font-size: 14px;
+    }
+    .poster-display {
+        width: 100%;
+    }
+    .info-box, .info-box-compact {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+    .program-compact-info h3 {
+        font-size: 16px;
+    }
+    .accordion-header {
+        font-size: 11px;
+        padding: 8px 8px;
+    }
+    .accordion-content {
+        padding: 0 8px;
+    }
+    .accordion-header.active + .accordion-content {
+        padding: 8px;
+    }
+    .modal-content {
+        padding: 15px 20px;
+    }
+    .modal-content h3 {
+        font-size: 18px;
+    }
+    .modal-content p {
+        font-size: 13px;
+    }
+    .modal-actions .btn-submit, 
+    .modal-actions .btn-secondary {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+    #add-to-cart-form select {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    #add-to-cart-form .btn-submit {
+        padding: 10px;
+        font-size: 14px;
+    }
 }
