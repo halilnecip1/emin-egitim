@@ -3,14 +3,13 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {# BU SATIR ÇOK ÖNEMLİ, ZATEN VARMIŞ #}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Emin Eğitim Yaz Okulları{% endblock %}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    {# Font Awesome CDN'i güncellendi, 6.5.2 yerine 6.0.0-beta3 gibi daha genel bir sürüm veya kendi ihtiyacınıza göre bırakın #}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -23,37 +22,27 @@
             <div class="logo">
                 <a href="{% url 'home' %}">
                     <img src="{% static 'img/logo.png' %}" alt="Site Logosu">
-                    {# İsteğe bağlı olarak logo yanına metin ekleyebilirsiniz #}
-                    {# <span>Emin Eğitim</span> #}
                 </a>
             </div>
-            {# main-nav-links div'i ve içindeki yapıyı değiştirdik #}
             <div class="main-nav-links">
                 <ul class="nav-links">
                     <li><a href="{% url 'home' %}">ANASAYFA</a></li>
-                    <li><a href="{% url 'home' %}">PROGRAMLAR</a></li> {# PROGRAMLAR linkinin doğru URL'sini ekledim #}
+                    <li><a href="#">PROGRAMLAR</a></li>
                 </ul>
                 <div class="auth-links">
                     {% if user.is_authenticated %}
                         <a href="{% url 'cart_detail' %}" class="nav-link-icon"><i class="fas fa-shopping-cart"></i> SEPET (<span id="cart-count">{{ cart_item_count }}</span>)</a>
-                        {# student_list yerine dashboard kullanıyorsanız burayı düzeltin #}
-                        <a href="{% url 'home' %}" class="nav-link-icon"><i class="fas fa-user"></i> {{ user.first_name|upper }} {{ user.last_name|upper }}</a> 
+                        <a href="{% url 'student_list' %}" class="nav-link-icon"><i class="fas fa-user"></i> {{ user.first_name|upper }} {{ user.last_name|upper }}</a>
                         <form class="logout-form" action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn-logout-icon"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ</button>
                         </form>
                     {% else %}
-                        {# Giriş/Kayıt ol butonu mobil görünümde tek bir buton olarak kalacak #}
                         <a href="{% url 'login' %}" class="btn-primary-nav">GİRİŞ / KAYIT OL</a>
                     {% endif %}
                 </div>
-                {# YENİ EKLENEN HAMBURGER MENÜ BUTONU #}
-                <div class="hamburger">
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3"></div>
-                </div>
             </div>
+            
         </nav>
     </header>
 
@@ -63,38 +52,8 @@
     </main>
 
     <script src="{% static 'js/main.js' %}"></script>
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-    {# YENİ EKLENEN JAVASCRIPT KODU #}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const body = document.body; // Body elementine referans
-
-            hamburger.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                hamburger.classList.toggle('active');
-                // Mobil menü açıkken body'nin kaymasını engelle
-                if (navLinks.classList.contains('active')) {
-                    body.style.overflow = 'hidden';
-                } else {
-                    body.style.overflow = 'auto';
-                }
-            });
-
-            // Menü açıldıktan sonra dışarı tıklandığında kapatmak için
-            document.addEventListener('click', function(event) {
-                if (!navLinks.contains(event.target) && !hamburger.contains(event.target) && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    body.style.overflow = 'auto';
-                }
-            });
-
-            
-        });
-    </script>
 
     {% if messages %}
     <script>
